@@ -82,7 +82,7 @@ func (mt *MatchTable) UpdateSuperset() {
 }
 
 // GenerateTable renders a MatchTable into a 2D map
-func (mt *MatchTable) GenerateTable() [][]string {
+func (mt *MatchTable) GenerateTable(renderopts *TableRenderOptions) [][]string {
   var result [][]string
   var header []string
   header = append(header,"ITEM")
@@ -96,9 +96,9 @@ func (mt *MatchTable) GenerateTable() [][]string {
     row = append(row, item)
     for _,column := range mt.Columns {
       if column.Has(item) {
-        row = append(row,"X")
+        row = append(row,renderopts.YesValue)
       } else {
-        row = append(row,"-")
+        row = append(row,renderopts.NoValue)
       }
     }
     result = append(result,row)
@@ -106,14 +106,23 @@ func (mt *MatchTable) GenerateTable() [][]string {
   return result
 }
 
+// TableRenderOptions encapsulates configuration for rendering tables.
+type TableRenderOptions struct {
+  YesValue, NoValue string
+}
+
 func main() {
+  yesValue := flag.String("yes-value", "X", "string used to indicate an item was present in a column")
+  noValue := flag.String("no-value", "-", "string used to indicate an item was NOT present in a column")
+  separator := flag.String("separator", " ", "string used to separate rendered columns in the output")
   flag.Parse()
+  renderopts := &TableRenderOptions{YesValue: *yesValue, NoValue: *noValue}
   mt,err := NewMatchTable(flag.Args())
   if err != nil {
     fmt.Printf("error setting up matchtable: %v\n", err)
     os.Exit(1)
   }
-  for _,row := range mt.GenerateTable() {
-    fmt.Println(strings.Join(row," "))
+  for _,row := range mt.GenerateTable(renderopts) {
+    fmt.Println(strings.Join(row,*separator))
   }
 }
