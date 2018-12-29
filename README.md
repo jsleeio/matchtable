@@ -4,7 +4,7 @@
 
 `matchtable` reads lines from files and generates a map indicating which lines
 are present in which files. This is similar to the standard Unix utility
-`column`, except that it accepts any number of files at the input.
+`comm`, except that it accepts any number of files at the input.
 
 ## demo
 
