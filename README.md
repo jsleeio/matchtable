@@ -22,10 +22,23 @@ ITEM  A  B  C  D
 5     -  -  X  X
 ```
 
+## options
+
+```
+$ ./matchtable -h
+Usage of ./matchtable:
+  -no-value string
+    	string used to indicate an item was NOT present in a column (default "-")
+  -separator string
+    	string used to separate rendered columns in the output (default " ")
+  -yes-value string
+    	string used to indicate an item was present in a column (default "X")
+```
+
 ## original use case
 
 The first use case for `matchtable` was determining where AWS security groups
-were used, as they can be referenced in an ever-expand variety of places,
+were used, as they can be referenced in an ever-expanding variety of places,
 including but very likely not limited to the below:
 
 * security group rules
