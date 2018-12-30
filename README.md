@@ -9,18 +9,23 @@ are present in which files. This is similar to the standard Unix utility
 ## demo
 
 ```
-$ seq 1 3 > A
-$ seq 2 4 > B
-$ seq 3 5 > C
-$ seq 4 5 > D
-$ matchtable [A-D] | column -t
-ITEM  A  B  C  D
-1     X  -  -  -
-2     X  X  -  -
-3     X  X  X  -
-4     -  X  X  X
-5     -  -  X  X
-```
+$ cat testdata.sh
+#!/bin/sh
+seq 1 3 > A
+seq 2 4 > B
+seq 3 5 > C
+seq 4 5 > D
+seq 5 5 > E
+./matchtable [A-E]
+
+
+$ ./testdata.sh
+ITEM A B C D E
+1 X - - - -
+2 X X - - -
+3 X X X - -
+4 - X X X -
+5 - - X X X
 
 ## options
 
@@ -31,6 +36,8 @@ Usage of ./matchtable:
     	string used to indicate an item was NOT present in a column (default "-")
   -separator string
     	string used to separate rendered columns in the output (default " ")
+  -sort
+    	sort the superset of items lexicographically (default true)
   -yes-value string
     	string used to indicate an item was present in a column (default "X")
 ```
@@ -54,6 +61,5 @@ including but very likely not limited to the below:
 
 ## future improvements
 
-* output sorting
 * column aliases
 * improved memory efficiency
