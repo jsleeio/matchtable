@@ -26,6 +26,7 @@ ITEM A B C D E
 3 X X X - -
 4 - X X X -
 5 - - X X X
+```
 
 ## options
 
