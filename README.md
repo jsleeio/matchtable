@@ -11,21 +11,23 @@ are present in which files. This is similar to the standard Unix utility
 ```
 $ cat testdata.sh
 #!/bin/sh
+
 seq 1 3 > A
 seq 2 4 > B
 seq 3 5 > C
 seq 4 5 > D
 seq 5 5 > E
-./matchtable [A-E]
+
+./matchtable [A-E] | column -t
 
 
 $ ./testdata.sh
-ITEM A B C D E
-1 X - - - -
-2 X X - - -
-3 X X X - -
-4 - X X X -
-5 - - X X X
+ITEM  A  B  C  D  E
+1     X  -  -  -  -
+2     X  X  -  -  -
+3     X  X  X  -  -
+4     -  X  X  X  -
+5     -  -  X  X  X
 ```
 
 ## options

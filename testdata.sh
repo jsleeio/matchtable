@@ -6,4 +6,4 @@ seq 3 5 > C
 seq 4 5 > D
 seq 5 5 > E
 
-./matchtable [A-E]
+./matchtable [A-E] | column -t
